@@ -9,6 +9,7 @@ async def retrieve_items():
     return get_items()
 
 
+@router.get("/items/{item_id}", tags=["items"])
 async def retrieve_item_by_id(item_id: str):
     items = get_items()
     if item_id not in items:
