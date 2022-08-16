@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from utils.main_board_utils import get_items
+from server.utils.main_board_utils import get_items
 
 router = APIRouter()
 

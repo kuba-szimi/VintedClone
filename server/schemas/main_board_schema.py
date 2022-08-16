@@ -1,7 +1,7 @@
 from typing import Union
 from pydantic import BaseModel
-from enums.size_enum import SizeEnum
-from enums.color_enum import ColorEnum
+from server.enums.size_enum import SizeEnum
+from server.enums.color_enum import ColorEnum
 
 
 class Item(BaseModel):
