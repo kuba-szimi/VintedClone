@@ -15,3 +15,5 @@ async def retrieve_item_by_id(item_id: str):
     if item_id not in items:
         raise HTTPException(status_code=404, detail="Item Not Found")
     return items[item_id]
+
+# todo: add router with post method to add items
