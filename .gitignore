@@ -2,3 +2,4 @@
 venv/
 .idea/
 *.db
+db_check_script.py
