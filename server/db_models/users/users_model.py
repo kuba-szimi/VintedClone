@@ -1,18 +1,19 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
+#from server.db_models.items.items_model import ItemModel
 
 from server.database import Base
 
 
-class User(Base):
+class UserModel(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String(100), unique=True, index=True)
-    nickname = Column(String(50), unique=True, index=True)
-    hashed_password = Column(String)
-    is_active = Column(Boolean, default=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    email = Column(String(100), unique=True, index=True, nullable=False)
+    nickname = Column(String(50), unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    # is_active = Column(Boolean, default=True)
     location = Column(String(50))
     bio = Column(String)
 
-    items = relationship("Item", back_populates="owner")
+    items = relationship("ItemModel", back_populates="owner")
