@@ -28,10 +28,7 @@ class ItemManager:
     def retrieve_main_board(self, filters: Dict):
         pass
 
-    def _apply_filters(self, query: Query, filters: Dict):
-        for filter_name, filter_value in filters.items():
-            if filter_name == "size":
-                query = query.filter()
+
 
     def add_items(self, user_id: int, item: ItemCreate) -> Item:
         db_item = ItemModel(
