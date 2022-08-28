@@ -1,8 +1,9 @@
+from typing import List, Dict
 from fastapi import HTTPException
+from passlib.hash import bcrypt
 from server.db_models.users.users_model import UserModel
 from server.database import get_db
 from server.schemas.users_schema import UserCreate, User
-from typing import List, Dict
 
 
 class UserManager:
@@ -19,14 +20,18 @@ class UserManager:
             raise HTTPException(status_code=404, detail="User Not Found")
         return db_user
 
+    @staticmethod
+    def hash_password(plain_password: str):
+        return bcrypt.hash(plain_password)
+
     def retrieve_users_by_username(self, username: str) -> User:
         return self._db.query(UserModel).filter(UserModel.username == username).first()
 
     def create_user(self, user: UserCreate):
-        fake_hashed_password = user.password + "notreallyhashed"
+        hashed_password = self.hash_password(user.password)
         db_user = UserModel(
             email=user.email,
-            hashed_password=fake_hashed_password,
+            hashed_password=hashed_password,
             username=user.username,
             disabled=False,
             location=user.location
@@ -52,7 +57,6 @@ class UserManager:
             raise HTTPException(status_code=404, detail="User Not Found")
         self._db.query(UserModel).filter(UserModel.id == user_id).delete(synchronize_session=False)
         self._db.commit()
-        self._db.refresh()
         return "User has been deleted successfully"
 
 
