@@ -19,15 +19,16 @@ class UserManager:
             raise HTTPException(status_code=404, detail="User Not Found")
         return db_user
 
-    def retrieve_users_by_nickname(self, nickname: str) -> User:
-        return self._db.query(UserModel).filter(UserModel.nickname == nickname).first()
+    def retrieve_users_by_username(self, username: str) -> User:
+        return self._db.query(UserModel).filter(UserModel.username == username).first()
 
-    def create_user(self, user: UserCreate) -> UserCreate:
+    def create_user(self, user: UserCreate):
         fake_hashed_password = user.password + "notreallyhashed"
         db_user = UserModel(
             email=user.email,
             hashed_password=fake_hashed_password,
-            nickname=user.nickname,
+            username=user.username,
+            disabled=False,
             location=user.location
         )
         self._db.add(db_user)

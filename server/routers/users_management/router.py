@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Depends
 from fastapi_utils.cbv import cbv
 from typing import List, Dict, Union
 from server.utils.users_utils import UserManager
@@ -30,7 +30,7 @@ class UserCBV:
             "message": "User successfully created",
             "result": {
                 "email": db_user.email,
-                "nickname": db_user.nickname,
+                "username": db_user.username,
                 "location": db_user.location
             }
         }

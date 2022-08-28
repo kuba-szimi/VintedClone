@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Depends
 from fastapi_utils.cbv import cbv
 from typing import List, Optional
 from server.utils.items_utils import ItemManager
@@ -18,7 +18,7 @@ class MainBoardCBV:
     def __init__(self):
         self.item_manager = ItemManager()
 
-    @router.get("/main-board")
+    @router.get("/main-board", )
     def retrieve_main_board(
             self,
             page: int = Query(
