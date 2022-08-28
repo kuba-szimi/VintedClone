@@ -21,15 +21,16 @@ def upgrade() -> None:
     op.create_table('users',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('email', sa.String(length=100), nullable=False),
-    sa.Column('nickname', sa.String(length=50), nullable=False),
+    sa.Column('username', sa.String(length=50), nullable=False),
     sa.Column('hashed_password', sa.String(), nullable=False),
+    sa.Column('disabled', sa.Boolean(), nullable=False),
     sa.Column('location', sa.String(length=50), nullable=True),
     sa.Column('bio', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
     op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
-    op.create_index(op.f('ix_users_nickname'), 'users', ['nickname'], unique=True)
+    op.create_index(op.f('ix_users_username'), 'users', ['username'], unique=True)
     op.create_table('items',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
@@ -64,7 +65,7 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_items_color'), table_name='items')
     op.drop_index(op.f('ix_items_brand'), table_name='items')
     op.drop_table('items')
-    op.drop_index(op.f('ix_users_nickname'), table_name='users')
+    op.drop_index(op.f('ix_users_username'), table_name='users')
     op.drop_index(op.f('ix_users_id'), table_name='users')
     op.drop_index(op.f('ix_users_email'), table_name='users')
     op.drop_table('users')
