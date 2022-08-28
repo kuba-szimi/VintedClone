@@ -8,13 +8,13 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    nickname: str
+    username: str
     password: str
     location: str
 
 
 class UserView(UserBase):
-    nickname: str
+    username: str
     #is_active: bool
     location: str
     bio: Union[str, None] = None
@@ -23,7 +23,7 @@ class UserView(UserBase):
 
 class User(UserBase):
     id: int
-    #is_active: bool
+    disabled: bool
     location: str
     bio: Union[str, None] = None
     items: List[Item] = []
