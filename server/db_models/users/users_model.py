@@ -10,8 +10,9 @@ class UserModel(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     email = Column(String(100), unique=True, index=True, nullable=False)
-    nickname = Column(String(50), unique=True, index=True, nullable=False)
+    username = Column(String(50), unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
+    disabled = Column(Boolean, nullable=False)
     # is_active = Column(Boolean, default=True)
     location = Column(String(50))
     bio = Column(String)
